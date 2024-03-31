@@ -13,7 +13,7 @@
 **Answer**: Terraform configuration file can be found in (rds-mysql.tf) and also image indicating how it would look like in AWS.
 ![RDS MySQL SG](rds-mysql-sg.png)
 
-### 3. What solution (described in text form) would you recommend for application in AWS Account A to securely access AWS SQS queue in AWS Account B?
+#### 3. What solution (described in text form) would you recommend for application in AWS Account A to securely access AWS SQS queue in AWS Account B?
 
 **Answer**: Update the SQS queue resource based policy to allow actions from the other account, then configure IAM policies in the accessing account to allow necessary SQS actions. Here is how it could be done:
 
