@@ -1,0 +1,40 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        /*
+            AllowUserSecureAccess: This statement allows John to Get and 
+            Put objects in the johns_files/ path, but only when accessing the bucket 
+            over HTTPS (aws:SecureTransport equals true).
+        */
+        {
+            "Sid": "AllowUserSecureAccess",
+            "Effect": "Allow",
+            "Principal": {"AWS": "arn:aws:iam::123456789012:user/John"},
+            "Action": ["s3:GetObject", "s3:PutObject"],
+            "Resource": "arn:aws:s3:::your-bucket-name/johns_files/*",
+            "Condition": {"Bool": {"aws:SecureTransport": "true"}}
+        },
+        /*
+            Full Access for Account 333456789333: This grants all users and roles from the 
+            specified AWS account full access to the bucket.
+        */
+        {
+            "Sid": "AllowAccountFullAccess",
+            "Effect": "Allow",
+            "Principal": {"AWS": "arn:aws:iam::333456789333:root"},
+            "Action": "s3:*",
+            "Resource": ["arn:aws:s3:::your-bucket-name", "arn:aws:s3:::your-bucket-name/*"]
+        }        
+        /*
+            AllowDevelopersGetObject: This provides GetObject permission 
+            to the "Developers" group for objects within the developer/ path.
+        */
+        {
+            "Sid": "AllowDevelopersGetObject",
+            "Effect": "Allow",
+            "Principal": {"AWS": "arn:aws:iam::123456789000:group/Developers"},
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::your-bucket-name/developer/*"
+        }
+    ]
+}

@@ -1,0 +1,15 @@
+{
+    "Version": "2012-10-17",
+    "Id": "QueuePolicy",
+    "Statement": [
+        {
+            "Sid": "AllowCrossAccountAccess",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::AccountA-ID:user/UserOrRole"
+            },
+            "Action": ["sqs:SendMessage", "sqs:ReceiveMessage"],
+            "Resource": "arn:aws:sqs:region:AccountB-ID:QueueName"
+        }
+    ]
+}
